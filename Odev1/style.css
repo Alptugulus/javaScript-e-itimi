@@ -6,7 +6,7 @@ body {
 .wrapper {
   background-color: #0d0c14;
   width: 100%;
-  height: 100vh;
+  height: 93vh;
   border-radius: 25px;
   color: aliceblue;
   display: flex;
@@ -29,7 +29,7 @@ p {
   margin-bottom: 10px;
   padding-left: 10px;
 }
-#pasword {
+#password {
   height: 20px;
   width: 250px;
   border-radius: 25px;
@@ -40,6 +40,7 @@ p {
 }
 #rememberMe {
   margin-bottom: 20px;
+  
 }
 
 .form {
@@ -62,4 +63,5 @@ input::placeholder {
 a {
   color: aliceblue;
   margin-left: 85px;
+  cursor: pointer;
 }
