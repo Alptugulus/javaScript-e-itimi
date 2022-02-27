@@ -50,11 +50,12 @@ body {
   top: 50%;
   left: 50%;
   height: 12rem;
-  width: 0.5rem;
+  width: 1rem;
   border-radius: 20px;
   background-color: yellow;
   transform: translateX(-50%);
   transform-origin: 25% 0;
+  
 }
 .dot {
   position: absolute;
