@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: rgb(0, 3, 15);
+  background: radial-gradient(
+    circle,
+    rgba(0, 3, 15, 1) 0%,
+    rgba(252, 70, 70, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.clock-box{
+    display: flex;
+}
+.clock{
+    width: 120px;
+    height: 180px;
+    line-height: 180px;
+    background-color: black;
+    color: aliceblue;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0 5px;
+    font-size: 50px;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+.clock:hover{
+    background-color: white;
+    color: black;
+    transform: translateY(-10px);
+}
