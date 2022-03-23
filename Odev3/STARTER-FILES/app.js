@@ -17,7 +17,7 @@ empt.forEach((element) => {
 });
 const r = document.querySelector(".previous");
 r.onclick = function () {
-  alert("r yapıyorsunuz ");
+  alert("bir önceki aya yönlendiriliyorsunuz");
 };
 const d = document.querySelector(".next");
 d.onclick = function () {

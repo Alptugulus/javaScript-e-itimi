@@ -1,103 +1,90 @@
-// const btns = document.querySelectorAll(".add");
-// const products = document.querySelectorAll(".products li");
-// console.log(btns);
-// console.log(products);
-// products.forEach((product, index) => {
-//   btns[index].addEventListener("click", () => {
-//     const img = product.querySelector(".plate img").src;
-//     const productName = product.querySelector(
-//       ".content .menu-item"
-//     ).textContent;
+const btns = document.querySelectorAll(".add");
+const products = document.querySelectorAll(".products li");
 
-//     const price = product.querySelector(".content .price").textContent;
+function quantityListener(cart) {
+  const allCartItems = cart.querySelectorAll("li");
 
-//     const item = `
-//     <li>
-//       <div class="plate">
-//         <img src="${img}" alt="Fish Sticks and Fries" class="plate" />
-//         <div class="quantity">1</div>
-//       </div>
-//       <div class="content">
-//         <p class="menu-item">${productName}</p>
-//         <p class="price">${price}</p>
-//       </div>
-//       <div class="quantity__wrapper">
-//         <button class="decrease">
-//           <img src="images/chevron.svg" />
-//         </button>
-//         <div class="quantity">1</div>
-//         <button class="increase">
-//           <img src="images/chevron.svg" />
-//         </button>
-//       </div>
-//       <div class="subtotal">
-//       ${price}
-//       </div>
-//     </li>`;
+  if (allCartItems.length > 0) {
+    allCartItems[allCartItems.length - 1]
+      .querySelector(".decrease")
+      .addEventListener("click", () => {
+        allCartItems[allCartItems.length - 1].querySelector(".plate .quantity")
+          .textContent--;
+        allCartItems[allCartItems.length - 1].querySelector(
+          ".quantity__wrapper .quantity"
+        ).textContent--;
 
-//     const cart = document.querySelector(".cart-summary");
-//     cart.insertAdjacentHTML("beforeend", item);
+        if (
+          Number(
+            allCartItems[allCartItems.length - 1].querySelector(
+              ".quantity__wrapper .quantity"
+            ).textContent
+          ) <= 0
+        ) {
+          allCartItems[allCartItems.length - 1].remove();
+        }
+      });
 
-//     const allCartItems = cart.querySelectorAll("li");
+    allCartItems[allCartItems.length - 1]
+      .querySelector(".increase")
+      .addEventListener("click", () => {
+        allCartItems[allCartItems.length - 1].querySelector(".plate .quantity")
+          .textContent++;
+        allCartItems[allCartItems.length - 1].querySelector(
+          ".quantity__wrapper .quantity"
+        ).textContent++;
+      });
+  }
+}
 
-//     allCartItems.forEach((item, index) => {
-//       item.querySelector(".decrease").addEventListener("click", () => {
-//         item.querySelector(".plate .quantity").textContent--;
-//         item.querySelector(".quantity__wrapper .quantity").textContent--;
-//         console.log(index);
-//       });
+products.forEach((product, index) => {
+  btns[index].addEventListener("click", () => {
+    const img = product.querySelector(".plate img").src;
+    const productName = product.querySelector(
+      ".content .menu-item"
+    ).textContent;
 
-//       item.querySelector(".increase").addEventListener("click", () => {
-//         item.querySelector(".plate .quantity").textContent++;
-//         item.querySelector(".quantity__wrapper .quantity").textContent++;
-//       });
-//     });
-//   });
-// });
-/*const names = document.querySelectorAll(".products .menu-item");
-const price = document.querySelectorAll(".products .price");
-names.forEach((element , index) => {
+    const price = product.querySelector(".content .price").textContent;
 
-  console.log(`${price[index].innerHTML}-${names[index].innerHTML}`);
-});
-price.forEach((element) => {
-  console.log(element.innerHTML);
-});
-console.log(price[0]);
-// for (let i = 0; i < price.length ; i++) {
-//   console.log(`${price[i].innerHTML}-${names[i].innerHTML}`);
-// }*/
+    const item = `
+    <li>
+      <div class="plate">
+        <img src="${img}" alt="Fish Sticks and Fries" class="plate" />
+        <div class="quantity">1</div>
+      </div>
+      <div class="content">
+        <p class="menu-item">${productName}</p>
+        <p class="price">${price}</p>
+      </div>
+      <div class="quantity__wrapper">
+        <button class="decrease">
+          <img src="images/chevron.svg" />
+        </button>
+        <div class="quantity">1</div>
+        <button class="increase">
+          <img src="images/chevron.svg" />
+        </button>
+      </div>
+      <div class="subtotal">
+      ${price}
+      </div>
+    </li>`;
 
-/*const btns = document.querySelectorAll(".add");
-btns.forEach((element, index) => {
-  console.log(element.innerText);
+    const cart = document.querySelector(".cart-summary");
 
-  element.addEventListener(
-    "click",
-    function () {
-      element.innerText = `${element.innerText} ${++index}`;
-    },
-    { once: true }
-  );
-});*/
+    const addToCart = document.querySelectorAll(".cart-summary .menu-item");
 
-const prices = document.querySelectorAll(".price");
+    if (addToCart.length === 0) {
+      cart.insertAdjacentHTML("beforeend", item);
+      quantityListener(cart);
+    } else {
+      const nameProducts = [];
+      addToCart.forEach((item) => nameProducts.push(item.innerText));
 
-prices.forEach((element) => {
-  element.style.textDecoration = "line-through";
-  element.style.margin = 0;
-
-  //console.log(Number(element.innerText.substring(1)));
-  //element.innerText = Number(element.innerText.substring(1)) ;
-
-  const discountPrice = `
-  
-  
-  <span class="" style="text-decoration:initial"> ${
-    Number(element.innerText.substring(1)) - 1
-  } </span>
-  
-  `;
-  element.parentNode.insertAdjacentHTML("beforeend", discountPrice);
-  console.log(element.parentNode);
+      if (!nameProducts.includes(productName)) {
+        cart.insertAdjacentHTML("beforeend", item);
+        quantityListener(cart);
+      }
+    }
+  });
 });
